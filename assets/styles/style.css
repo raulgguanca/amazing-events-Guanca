@@ -55,7 +55,7 @@ h1 {
     color: #f72585;
 }
 
-/* cards pages */
+/* search */
 .search-form {
     width: 100vw;
     margin: 2rem 3rem;
@@ -74,6 +74,7 @@ h1 {
     border-radius: 5px;
 }
 
+/* cards pages */
 .cards-container {
     margin: 4rem 2rem;
 }
@@ -150,7 +151,30 @@ textarea {
 }
 
 /* stats page */
+.tables-container {
+    width: 90vw;
+    margin: 1rem auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
+}
+
+table, th, td {
+    border: 1px solid black;
+    margin: 0;
+}
+
+th, td {
+    height: 1.5rem;
+}
+
+.table-main-head {
+    height: 3rem;
+    background-color: wheat;
+    font-size: x-large;
+    font-weight: bolder;
+}
 
 /* footer */
 footer {
@@ -190,4 +214,26 @@ address {
 address a {
     text-decoration: none;
     color: #f72585;
+}
+
+@media screen and (max-width:1000px) {
+    .search-form {
+        display: flex;
+        justify-content: flex-start;
+        margin: 0;
+    }
+}
+
+@media screen and (max-width:800px) {
+    .search-form {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        margin: 0;
+    }
+
+    .main-check  {
+        display: flex;
+        flex-direction: column;
+    }
 }
