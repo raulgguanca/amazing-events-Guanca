@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      href="../assets/img/favicon-AmazingEvents.ico"
+      type="image/x-icon"
+    />
+    <link
+      rel="stylesheet"
+      href="../assets/styles/fontawesome/css/all.css"<
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../assets/styles/style.css" />
+    <title>Past Events</title>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg justify-content-between">
+        <img src="../assets/img/Logo Amazing Events.png" alt="AE" />
+
+        <!-- hamburger menu -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span  class="navbar-toggler-icon"></span>
+        </button>
+        
+        <!-- navigation bar -->
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav flex-row ms-auto">
+            <a class="nav-item nav-link" href="../index.html">Home</a>
+
+            <a class="nav-item nav-link" href="./upcoming_events.html
+            ">Upcoming Events</a>
+
+            <a class="nav-item nav-link" href="./past_events.html
+            ">Past Events</a>
+
+            <a class="nav-item nav-link" href="./contact.html">Contact</a>
+
+            <a class="nav-item nav-link" href="./stats.html">Stats</a>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- title and navigation -->
+    <div class="title">
+      <a href="./upcoming_events.html" class="navButton" id="back"><i class="fa fa-backward fa-2x aria-hidden="true"></i></a>
+
+      <h1>Past Events</h1>
+
+      <a href="./contact.html" class="navButton" id="foward"><i class="fa fa-forward fa-2x" aria-hidden="true"></i></a>
+    </div>
+
+    <main>
+      <form action="../main.js" method="get" class="search-form">
+      <!-- checkboxs -->
+        <fieldset class="main-check">
+          <label>
+            <input type="checkbox" name="home-checkbox" id="categori1" value="categori1">
+            Category1
+          </label>
+
+          <label>
+            <input type="checkbox" name="home-checkbox" id="categori2" value="categori2">
+            Category2
+          </label>
+
+          <label>
+            <input type="checkbox" name="home-checkbox" id="categori3" value="categori3">
+            Category3
+          </label>
+
+          <label>
+            <input type="checkbox" name="home-checkbox" id="categori4" value="categori4">
+            Category4
+          </label>
+
+          <label>
+            <input type="checkbox" name="home-checkbox" id="categori15" value="categori5">
+            Category5
+          </label>
+        </fieldset>
+
+        <!-- search form -->
+        <fieldset class="search-field">
+          <label for="search">
+            <input type="text" name="search" id="search">
+          </label>
+        </fieldset>
+
+        <!-- submit button -->
+        <div id="form-past_events">
+          <button type="submit"><i class="fa-sharp fa-solid fa-magnifying-glass"></i></button>
+        </div>
+      </form>
+
+      <!-- cards -->
+      <div class="cards-container row justify-content-around">
+        <div class="card" style="width: 18rem;">
+          <img class="card-img-top" src="../assets/img/Cinema.jpg" alt="cinema">
+          <div class="card-body">
+            <h5 class="card-title">Cinema</h5>
+            <p class="card-text">Lorem ipsum dolor sit.</p>
+            <div class="cardFooter">
+              <p>Price $0000</p>
+            <a href="./details.html" class="btn btn-success">View More...</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="width: 18rem;">
+          <img class="card-img-top" src="../assets/img/Costume_Party.jpg" alt="Costume Party">
+          <div class="card-body">
+            <h5 class="card-title">Costume Party</h5>
+            <p class="card-text">Lorem ipsum dolor sit.</p>
+            <div class="cardFooter">
+              <p>Price $0000</p>
+            <a href="./details.html" class="btn btn-success">View More...</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="width: 18rem;">
+          <img class="card-img-top" src="../assets/img/Food_Fair.jpg" alt="Food Fair">
+          <div class="card-body">
+            <h5 class="card-title">Food Fair</h5>
+            <p class="card-text">Lorem ipsum dolor sit.</p>
+            <div class="cardFooter">
+              <p>Price $0000</p>
+            <a href="./details.html" class="btn btn-success">View More...</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="width: 18rem;">
+          <img class="card-img-top" src="../assets/img/Marathon.jpg" alt="Marathon">
+          <div class="card-body">
+            <h5 class="card-title">Marathon</h5>
+            <p class="card-text">Lorem ipsum dolor sit.</p>
+            <div class="cardFooter">
+              <p>Price $0000</p>
+            <a href="./details.html" class="btn btn-success">View More...</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <!-- social media -->
+      <div class="socialMedia">
+        <a href="https://www.instagram.com" target="_blank"><i class="fa-brands fa-square-instagram fa-2x"></i></a>
+
+        <a href="https://www.facebook.com" target="_blank"><i class="fa-brands fa-facebook fa-2x"></i></a>
+
+        <a href="https://web.whatsapp.com/" target="_blank"><i class="fa-brands fa-square-whatsapp fa-2x"></i></a>
+      </div>
+
+      <!-- develop -->
+      <div class="div footerSignature">
+        <address>
+          @2023 Raúl Guanca. Contact
+        <a href="mailto:raulguanc@gmail.com">me</a>
+        </address>
+      </div>
+    </footer>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+    
+    <script src="../main.js"></script>
+  </body>
+</html>
