@@ -105,7 +105,7 @@ h1 {
 }
 
 .img-details {
-    width: 38rem;
+    width: 90%;
     margin-bottom: 1rem;
 }
 
@@ -216,15 +216,40 @@ address a {
     color: #f72585;
 }
 
+/* media queries */
 @media screen and (max-width:1000px) {
+    .navbar {
+        height: 10vh;
+    }
+    
     .search-form {
         display: flex;
         justify-content: flex-start;
         margin: 0;
     }
+
+    .card-body-details {
+        font-size: 1rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+    
 }
 
 @media screen and (max-width:800px) {
+
+
+    .navbar-nav > a {
+        margin: 0 5px;
+        font-size: large;
+    }
+
+    h1 {
+        font-size: x-large;
+    }
+
     .search-form {
         display: flex;
         flex-direction: column;
@@ -235,5 +260,19 @@ address a {
     .main-check  {
         display: flex;
         flex-direction: column;
+    }
+
+    .card-details {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card-body-details {
+        width: 50vw;
+        font-size: 0.9rem;
+    }
+
+    h2 {
+        font-size: 1.9rem;
     }
 }
