@@ -16,9 +16,8 @@ body {
     background-color:  bisque;
 }
 
-nav > img {
+nav img {
     width: 15%;
-    margin-left: 1rem;
 }
 
 .navbar-nav > a {
@@ -223,7 +222,7 @@ address a {
 /* media queries */
 @media screen and (max-width:1000px) {
     .navbar {
-        height: 12vh;
+        height: 13vh;
     }
     
     .search-form {
@@ -245,7 +244,7 @@ address a {
 @media screen and (max-width:800px) {
     .navbar-nav > a {
         margin: 0 5px;
-        font-size: large;
+        font-size: medium;
     }
 
     h1 {
