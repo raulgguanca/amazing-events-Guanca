@@ -12,7 +12,7 @@ body {
 }
 
 .navbar {
-    height: 20vh;
+    height: 10vh;
     background-color:  bisque;
 }
 
@@ -31,9 +31,10 @@ nav img {
 }
 
 .title {
+    height: 8vh;
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
+    align-items: flex-start;
     padding: 1rem 0;
     background-color: antiquewhite;
 }
@@ -43,6 +44,7 @@ nav img {
 }
 
 h1 {
+    margin-top: -0.5rem;
     color: #f72585;
 }
 
@@ -54,10 +56,18 @@ h1 {
     color: #f72585;
 }
 
+main {
+    height: 77vh;
+}
+
+#main-details {
+    height: 85vh;
+}
+
 /* search */
 .search-form {
     width: 100vw;
-    margin: 2rem 3rem;
+    margin: 2rem;
     display: flex;
 }
 
@@ -75,23 +85,32 @@ h1 {
 
 /* cards pages */
 .cards-container {
-    margin: 4rem 2rem;
+    margin: 2rem;
 }
 
 .card {
-    width: 18rem;
+    width: 20rem;
+    height: 35rem;
+    margin: 0.3rem 0;
+    display: flex;
 }
 
 .card > img {
+    width: 100%;
+    height: 50%;
     margin-top: 1rem;
     border-radius: 10px;
     box-shadow: -5px -5px 5px orange;
 }
 
+.card-text {
+    height: 45%;
+}
+
 .cardFooter {
     display: flex;
-    align-items: baseline;
     justify-content: space-between;
+    align-items: flex-end;
 }
 
 /* card details */
@@ -103,6 +122,7 @@ h1 {
 
 .card-img {
     width: 50vw;
+    height: 10%;
     display: flex;
     align-items: center;
 }
@@ -118,6 +138,10 @@ h1 {
     align-items: center;
     justify-content: center;
     font-size: 1.5rem;
+}
+
+.card-body-details p {
+    height: 20%;
 }
 
 h2 {
@@ -181,6 +205,7 @@ th, td {
 
 /* footer */
 footer {
+    height: 5vh;
     padding: 0.5rem 0;
     display: flex;
     align-items: center;
@@ -207,6 +232,11 @@ footer {
 
 .fa-square-whatsapp:hover {
     color: green
+}
+
+.footerSignature {
+    margin-top: 1rem;
+    font-size: small;
 }
 
 address {
@@ -247,6 +277,11 @@ address a {
         font-size: medium;
     }
 
+.navbar-nav a:hover {
+    color: #f72585;
+    transform: scale(1, 1);
+}
+    
     h1 {
         font-size: x-large;
     }
@@ -265,6 +300,7 @@ address a {
 
     .card {
         width: 100vw;
+        height: 50vh;
         margin: 2px;
         align-items: center;
     }
@@ -273,22 +309,36 @@ address a {
         text-align: center;
     }
 
+    .card-text {
+        height: 25%;
+    }
+
+    .card > img {
+        width: 100%;
+    }
+
     .cardFooter {
         width: 60vw;
     }
 
     .card-img {
-        width: 100vw;
+        width: 100%;
     }
 
     .cards-container {
         width: 100vw;
+        height: 100vh;
         margin: 0;
     }
 
     .card-details {
         flex-direction: column;
         align-items: center;
+    }
+
+    .img-details {
+        width: 100%;
+        height: 100%;
     }
 
     .card-body-details {
