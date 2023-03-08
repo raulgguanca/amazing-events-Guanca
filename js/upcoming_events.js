@@ -1,17 +1,17 @@
 // variables
-const cardsContainer = document.getElementById('cardsCont');
+const cardsContainer = document.getElementById("cardsCont");
 
-let arrayEvents = allEvents[0].events;
+let arrayEvents = allEvents.events;
 
-let getCurrenDate = allEvents[0].currentDate;
+let getCurrenDate = allEvents.currentDate;
 
 // functions
 
-function addCards(eventCompositor){
-    let eventsCards = '';
-    for (const event of eventCompositor) {
-        if ( getCurrenDate <= event.date ) {
-        eventsCards += `
+function addCards(eventCompositor) {
+  let eventsCards = "";
+  for (const event of eventCompositor) {
+    if (getCurrenDate <= event.date) {
+      eventsCards += `
         <div class="card">
           <img class="card-img-top" src="${event.image}" alt="${event.image}">
 
@@ -28,11 +28,40 @@ function addCards(eventCompositor){
           </div>
         </div>
 
-        `}
+        `;
     }
-    return eventsCards;
+  }
+  return eventsCards;
 }
 
 let cards = addCards(arrayEvents);
 
 cardsContainer.innerHTML = cards;
+
+//categories
+const catCont = document.getElementById("catCont");
+
+function createCat(catCompositor) {
+  let catEvent = "";
+  for (const cat of catCompositor) {
+    catEvent += `
+          <label>
+            <input
+              type="checkbox"
+              name="ue-checkbox"
+              class="checkbox"
+              id="${cat}"
+              value="${cat}"
+            />
+            ${cat}
+          </label>
+    `;
+  }
+  return catEvent;
+}
+
+let category = createCat(categories);
+
+catCont.innerHTML = category;
+
+// categories filters

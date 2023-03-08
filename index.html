@@ -67,70 +67,20 @@
     <!-- title and navigation -->
     <div class="title">
       <a href="#" class="navButton" id="back"
-        ><i class="fa fa-backward  " aria-hidden="true"></i
+        ><i class="fa fa-backward" aria-hidden="true"></i
       ></a>
 
       <h1>Home</h1>
 
       <a href="./pages/upcoming_events.html" class="navButton" id="foward"
-        ><i class="fa fa-forward  " aria-hidden="true"></i
+        ><i class="fa fa-forward" aria-hidden="true"></i
       ></a>
     </div>
 
     <main>
-      <form action="./main.js" method="get" class="search-form">
+      <form action="./main.js" class="search-form">
         <!-- checkboxs -->
-        <fieldset class="main-check">
-          <label>
-            <input
-              type="checkbox"
-              name="home-checkbox"
-              id="categori1"
-              value="categori1"
-            />
-            Category1
-          </label>
-
-          <label>
-            <input
-              type="checkbox"
-              name="home-checkbox"
-              id="categori2"
-              value="categori2"
-            />
-            Category2
-          </label>
-
-          <label>
-            <input
-              type="checkbox"
-              name="home-checkbox"
-              id="categori3"
-              value="categori3"
-            />
-            Category3
-          </label>
-
-          <label>
-            <input
-              type="checkbox"
-              name="home-checkbox"
-              id="categori4"
-              value="categori4"
-            />
-            Category4
-          </label>
-
-          <label>
-            <input
-              type="checkbox"
-              name="home-checkbox"
-              id="categori15"
-              value="categori5"
-            />
-            Category5
-          </label>
-        </fieldset>
+        <fieldset class="main-check" id="catCont"></fieldset>
 
         <!-- search form -->
         <fieldset class="search-field">
@@ -139,8 +89,10 @@
           </label>
         </fieldset>
 
-        <!-- submit button 
-console.log("allEvent"-->
+        <!--no results container-->
+        <div class="no-results-container" id="no-results"></div>
+
+        <!-- submit button-->
         <div id="form-home">
           <button type="submit">
             <i class="fa-sharp fa-solid fa-magnifying-glass"></i>
@@ -149,7 +101,10 @@ console.log("allEvent"-->
       </form>
 
       <!-- cards -->
-      <div class="cards-container row justify-content-around" id="cardsCont"></div>
+      <div
+        class="cards-container row justify-content-around"
+        id="cardsCont"
+      ></div>
     </main>
 
     <footer>
