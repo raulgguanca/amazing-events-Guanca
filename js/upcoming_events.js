@@ -9,11 +9,14 @@ let getCurrenDate = allEvents.currentDate;
 
 // functions
 
+let cards = addCards(arrayEvents);
+
 function addCards(eventCompositor) {
   let eventsCards = "";
-  for (const event of eventCompositor) {
-    if (getCurrenDate <= event.date) {
-      eventsCards += `
+  if (eventCompositor.length != 0) {
+    for (const event of eventCompositor) {
+      if (getCurrenDate > event.date) {
+        eventsCards += `
         <div class="card">
           <img class="card-img-top" src="${event.image}" alt="${event.image}">
 
@@ -31,12 +34,18 @@ function addCards(eventCompositor) {
         </div>
 
         `;
+      }
     }
+  } else {
+    noResultsMssg.innerHTML = `
+<div class="no-results">
+<h2>There's nothing to show, check your spell and try again</h2>
+<img src="../assets/img/error.jpg" alt="error pinguin">
+</div>
+`;
   }
   return eventsCards;
 }
-
-let cards = addCards(arrayEvents);
 
 function paintCards() {
   cardsContainer.innerHTML = cards;

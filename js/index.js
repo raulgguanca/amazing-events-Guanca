@@ -7,8 +7,9 @@ let arrayEvents = allEvents.events;
 
 function addCards(eventCompositor) {
   let eventsCards = "";
-  for (const event of eventCompositor) {
-    eventsCards += `
+  if (eventCompositor.length != 0) {
+    for (const event of eventCompositor) {
+      eventsCards += `
         <div class="card">
           <img class="card-img-top" src="${event.image}" alt="${event.image}">
 
@@ -26,6 +27,14 @@ function addCards(eventCompositor) {
         </div>
 
         `;
+    }
+  } else {
+    noResultsMssg.innerHTML = `
+<div class="no-results">
+<h2>There's nothing to show, check your spell and try again</h2>
+<img src="./assets/img/error.jpg" alt="error pinguin">
+</div>
+`;
   }
   return eventsCards;
 }
@@ -136,12 +145,3 @@ function filtrInptCrdsBttn() {
 
 //calling functions
 paintCards();
-
-//else {
-//noResultsMssg.innerHTML = `
-//<div class="no-results">
-//<h2>There's nothing to show, check your spell and try again</h2>
-//<img src="./assets/img/error.jpg" alt="error pinguin">
-//</div>
-//`;
-//}
