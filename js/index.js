@@ -1,6 +1,8 @@
-// variables
+// cards creator
 
 const cardsContainer = document.getElementById("cardsCont");
+
+const noResultsMssg = document.getElementById("no-results");
 
 let arrayEvents = allEvents.events;
 
@@ -31,7 +33,9 @@ function addCards(eventCompositor) {
 
 let cards = addCards(arrayEvents);
 
-cardsContainer.innerHTML = cards;
+function paintCards() {
+  cardsContainer.innerHTML = cards;
+}
 
 //categories
 const catCont = document.getElementById("catCont");
@@ -74,17 +78,44 @@ checkBxCont.addEventListener("click", (e) => {
         checkBxCategories.splice(index, 1);
       }
     }
+    createCheckedEvents();
   }
 });
 
-function checkBxFilter(list, event) {
-  let listining = [];
+function checkBxCompositor(list, events) {
+  let checkedEvents = [];
 
-  for (const event of e) {
+  for (const e of events) {
+    if (list.includes(e.category)) {
+      checkedEvents.push(e);
+    }
   }
+  return checkedEvents;
+}
+
+function createCheckedEvents() {
+  cards = addCards(checkBxCompositor(checkBxCategories, arrayEvents));
+  paintCards();
 }
 
 //search filter
 const srchImpt = document.getElementById("search");
 
-const noResultsMssg = document.getElementById("no-results");
+function checkBxFilter(list, events) {
+  let inputFilter = [];
+
+  for (const e of events) {
+    if (e.name.toLowerCase().includes(list)) {
+      inputFilter.push(e);
+    }
+  }
+  return inputFilter;
+}
+
+srchImpt.addEventListener("keyup", () => {
+  cards = addCards(checkBxFilter(srchImpt.value.toLowerCase(), arrayEvents));
+  paintCards();
+});
+
+//calling functions
+paintCards();
