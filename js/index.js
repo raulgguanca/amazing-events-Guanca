@@ -78,9 +78,19 @@ checkBxCont.addEventListener("click", (e) => {
         checkBxCategories.splice(index, 1);
       }
     }
+    cards = [];
     createCheckedEvents();
   }
 });
+
+checkBxCont.addEventListener("click", (e) => {
+  if (!e.target.checked && checkBxCategories.length === 0) {
+    cards = addCards(arrayEvents);
+    paintCards();
+  }
+});
+
+let filtredEvents = [];
 
 function checkBxCompositor(list, events) {
   let checkedEvents = [];
@@ -99,7 +109,7 @@ function createCheckedEvents() {
 }
 
 //search filter
-const srchImpt = document.getElementById("search");
+const srchInpt = document.getElementById("search");
 
 function checkBxFilter(list, events) {
   let inputFilter = [];
@@ -112,10 +122,15 @@ function checkBxFilter(list, events) {
   return inputFilter;
 }
 
-srchImpt.addEventListener("keyup", () => {
-  cards = addCards(checkBxFilter(srchImpt.value.toLowerCase(), arrayEvents));
+srchInpt.addEventListener("keyup", () => {
+  cards = addCards(checkBxFilter(srchInpt.value.toLowerCase(), arrayEvents));
   paintCards();
 });
+
+function filtrInptCrdsBttn() {
+  cards = addCards(checkBxFilter(srchInpt.value.toLowerCase(), arrayEvents));
+  paintCards();
+}
 
 //calling functions
 paintCards();
