@@ -1,5 +1,4 @@
 // cards creator
-
 const cardsContainer = document.getElementById("cardsCont");
 
 const noResultsMssg = document.getElementById("no-results");
@@ -21,7 +20,7 @@ function addCards(eventCompositor) {
             <div class="cardFooter">
               <p>$${event.price}</p>
 
-              <a href="./pages/details.html" class="btn btn-success">View More...</a>
+              <a href="./pages/details.html?id=${event._id}" class="btn btn-success">View More...</a>
             </div>
           </div>
         </div>
@@ -104,8 +103,10 @@ function checkBxCompositor(list, events) {
 }
 
 function createCheckedEvents() {
-  cards = addCards(checkBxCompositor(checkBxCategories, arrayEvents));
-  paintCards();
+  if (checkBxCategories.length != 0) {
+    cards = addCards(checkBxCompositor(checkBxCategories, arrayEvents));
+    paintCards();
+  }
 }
 
 //search filter
@@ -127,6 +128,7 @@ srchInpt.addEventListener("keyup", () => {
   paintCards();
 });
 
+//input button
 function filtrInptCrdsBttn() {
   cards = addCards(checkBxFilter(srchInpt.value.toLowerCase(), arrayEvents));
   paintCards();
@@ -134,3 +136,12 @@ function filtrInptCrdsBttn() {
 
 //calling functions
 paintCards();
+
+//else {
+//noResultsMssg.innerHTML = `
+//<div class="no-results">
+//<h2>There's nothing to show, check your spell and try again</h2>
+//<img src="./assets/img/error.jpg" alt="error pinguin">
+//</div>
+//`;
+//}

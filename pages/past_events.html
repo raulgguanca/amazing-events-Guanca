@@ -78,7 +78,7 @@
     </div>
 
     <main>
-      <form action="./main.js" class="search-form">
+      <form class="search-form">
         <!-- checkboxs -->
         <fieldset class="main-check" id="catCont"></fieldset>
 
@@ -89,10 +89,9 @@
           </label>
         </fieldset>
 
-        <!-- submit button 
-console.log("allEvent"-->
+        <!-- submit button-->
         <div id="form-home">
-          <button type="submit">
+          <button type="button" onclick="filtrInptCrdsBttn()">
             <i class="fa-sharp fa-solid fa-magnifying-glass"></i>
           </button>
         </div>
@@ -103,6 +102,9 @@ console.log("allEvent"-->
         class="cards-container row justify-content-around"
         id="cardsCont"
       ></div>
+
+      <!--no results container-->
+      <div class="no-results-container" id="no-results"></div>
     </main>
 
     <footer>
