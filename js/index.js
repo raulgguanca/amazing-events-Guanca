@@ -31,7 +31,7 @@ function addCards(eventCompositor) {
   } else {
     noResultsMssg.innerHTML = `
 <div class="no-results">
-<h2>There's nothing to show, check your spell and try again</h2>
+<h2>There's nothing to show here! Try another category, event or check your spelling</h2>
 <img src="./assets/img/error.jpg" alt="error pinguin">
 </div>
 `;
@@ -98,8 +98,6 @@ checkBxCont.addEventListener("click", (e) => {
   }
 });
 
-let filtredEvents = [];
-
 function checkBxCompositor(list, events) {
   let checkedEvents = [];
 
@@ -133,8 +131,18 @@ function checkBxFilter(list, events) {
 }
 
 srchInpt.addEventListener("keyup", () => {
-  cards = addCards(checkBxFilter(srchInpt.value.toLowerCase(), arrayEvents));
-  paintCards();
+  if (checkBxCategories.length != 0) {
+    cards = addCards(
+      checkBxFilter(
+        srchInpt.value.toLowerCase(),
+        checkBxCompositor(checkBxCategories, arrayEvents)
+      )
+    );
+    paintCards();
+  } else {
+    cards = addCards(checkBxFilter(srchInpt.value.toLowerCase(), arrayEvents));
+    paintCards();
+  }
 });
 
 //input button

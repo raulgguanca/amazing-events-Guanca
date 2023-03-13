@@ -7,16 +7,21 @@ let arrayEvents = allEvents.events;
 
 let getCurrenDate = allEvents.currentDate;
 
-// functions
+let upcomingEvents = [];
 
-let cards = addCards(arrayEvents);
+for (const event of arrayEvents) {
+  if (getCurrenDate < event.date) {
+    upcomingEvents.push(event);
+  }
+}
+
+// functions
 
 function addCards(eventCompositor) {
   let eventsCards = "";
   if (eventCompositor.length != 0) {
     for (const event of eventCompositor) {
-      if (getCurrenDate > event.date) {
-        eventsCards += `
+      eventsCards += `
         <div class="card">
           <img class="card-img-top" src="${event.image}" alt="${event.image}">
 
@@ -34,18 +39,20 @@ function addCards(eventCompositor) {
         </div>
 
         `;
-      }
+      noResultsMssg.innerHTML = ``;
     }
   } else {
     noResultsMssg.innerHTML = `
 <div class="no-results">
-<h2>There's nothing to show, check your spell and try again</h2>
+<h2>There's nothing to show here! Try another category, event or check your spelling</h2>
 <img src="../assets/img/error.jpg" alt="error pinguin">
 </div>
 `;
   }
   return eventsCards;
 }
+
+let cards = addCards(upcomingEvents);
 
 function paintCards() {
   cardsContainer.innerHTML = cards;
@@ -99,7 +106,7 @@ checkBxCont.addEventListener("click", (e) => {
 
 checkBxCont.addEventListener("click", (e) => {
   if (!e.target.checked && checkBxCategories.length === 0) {
-    cards = addCards(arrayEvents);
+    cards = addCards(upcomingEvents);
     paintCards();
   }
 });
@@ -119,7 +126,7 @@ function checkBxCompositor(list, events) {
 
 function createCheckedEvents() {
   if (checkBxCategories.length != 0) {
-    cards = addCards(checkBxCompositor(checkBxCategories, arrayEvents));
+    cards = addCards(checkBxCompositor(checkBxCategories, upcomingEvents));
     paintCards();
   }
 }
@@ -139,13 +146,25 @@ function checkBxFilter(list, events) {
 }
 
 srchInpt.addEventListener("keyup", () => {
-  cards = addCards(checkBxFilter(srchInpt.value.toLowerCase(), arrayEvents));
-  paintCards();
+  if (checkBxCategories.length != 0) {
+    cards = addCards(
+      checkBxFilter(
+        srchInpt.value.toLowerCase(),
+        checkBxCompositor(checkBxCategories, upcomingEvents)
+      )
+    );
+    paintCards();
+  } else {
+    cards = addCards(
+      checkBxFilter(srchInpt.value.toLowerCase(), upcomingEvents)
+    );
+    paintCards();
+  }
 });
 
 //input button
 function filtrInptCrdsBttn() {
-  cards = addCards(checkBxFilter(srchInpt.value.toLowerCase(), arrayEvents));
+  cards = addCards(checkBxFilter(srchInpt.value.toLowerCase(), upcomingEvents));
   paintCards();
 }
 
