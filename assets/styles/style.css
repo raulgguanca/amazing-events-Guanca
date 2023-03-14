@@ -171,7 +171,6 @@ h2 {
 
 .no-results > h2 {
   font-size: x-large;
-  /*padding-botton: 1rem;*/
 }
 
 /* contact page */
@@ -285,6 +284,7 @@ address a {
         display: flex;
         justify-content: flex-start;
         margin: 0;
+  /*padding-botton: 1rem;*/
     }
 
     .card-body-details {
@@ -303,10 +303,10 @@ address a {
         font-size: medium;
     }
 
-.navbar-nav a:hover {
-    color: #f72585;
-    transform: scale(1, 1);
-}
+    .navbar-nav a:hover {
+        color: #f72585;
+        transform: scale(1, 1);
+    }
     
     h1 {
         font-size: x-large;
