@@ -1,14 +1,15 @@
-//details render
-const querySrt = location.search;
-const paramtrs = new URLSearchParams(querySrt);
-const eventId = paramtrs.get("id");
+setTimeout(() => {
+  //details render
+  const querySrt = location.search;
+  const paramtrs = new URLSearchParams(querySrt);
+  const eventId = paramtrs.get("id");
 
-const arrayEvents = allEvents.events;
-const cardsContainer = document.getElementById("main-details");
+  const arrayEvents = allEvents.events;
+  const cardsContainer = document.getElementById("main-details");
 
-let evnt = arrayEvents[eventId - 1];
+  let evnt = arrayEvents[eventId - 1];
 
-cardsContainer.innerHTML = `
+  cardsContainer.innerHTML = `
       <div class="cards-container card-details">
         <div class="card card-img">
           <img
@@ -38,3 +39,4 @@ cardsContainer.innerHTML = `
       </div>
 
         `;
+}, 1500);

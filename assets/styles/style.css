@@ -12,7 +12,7 @@ body {
 }
 
 .navbar {
-    height: 10vh;
+    /*height: 10vh;*/
     background-color:  bisque;
 }
 
@@ -31,7 +31,7 @@ nav img {
 }
 
 .title {
-    height: 8vh;
+    /*height: 8vh;*/
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -209,7 +209,7 @@ textarea {
     display: flex;
     flex-direction: column;
     justify-content: center;
-
+    gap: 1rem;
 }
 
 table, th, td {
