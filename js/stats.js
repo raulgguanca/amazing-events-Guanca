@@ -1,6 +1,6 @@
 setTimeout(() => {
   //variables
-  const eventStdtcsTab = document.getElementById("eventStadisticsTab");
+  //const eventStdtcsTab = document.getElementById("eventStadisticsTab");
 
   const top1 = document.getElementById("top1");
   const top2 = document.getElementById("top2");
@@ -23,10 +23,13 @@ setTimeout(() => {
   const getCurrentDate = allEvents.currentDate;
 
   let pastEvents = [];
+  let upcomingEvents = [];
 
   for (const event of arrayEvents) {
     if (getCurrentDate > event.date) {
       pastEvents.push(event);
+    } else {
+      upcomingEvents.push(event);
     }
   }
 
@@ -59,7 +62,6 @@ setTimeout(() => {
     }
   );
 
-  console.log(allEventsPerformance);
   //create table content
   //
   //highest percetage
@@ -106,6 +108,34 @@ setTimeout(() => {
   )}`;
 
   //sort of upcoming events
+  //definir por categorias
+  //la función se encarga del filtro
+  //possible for each
+  //must sum the cost of categories
+  let upcomingEventsPerformance = [];
+  let pastEventsPerformance = [];
+
+  function categoriesPerformance(arrEv) {
+    categories.forEach((cat) => {
+      let revenue = 0;
+      let assitanceAttend = 0;
+      let estimateAttend = 0;
+      let capacity = 0;
+
+      for (let i = 0; i < arrEv.length; i++) {
+        if (arrEv[i].category === cat) {
+          revenue += arrEv[i].price * arrEv[i].assistance;
+          //check if use assitance or estimate in revenue
+          capacity += arrEv[i].capacity;
+          if (assitanceAttend === undefined) {
+            estimateAttend += arrEv[i].estimate;
+          } else if (estimateAttend === undefined) {
+            assitanceAttend += arrEv[i].assistance;
+          }
+        }
+      }
+    });
+  }
 
   //sort of past events
 }, 1500);
