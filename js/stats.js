@@ -107,35 +107,72 @@ setTimeout(() => {
     capacityPerformance[2].capacity
   )}`;
 
-  //sort of upcoming events
-  //definir por categorias
-  //la función se encarga del filtro
-  //possible for each
-  //must sum the cost of categories
+  //categories performance generator
   let upcomingEventsPerformance = [];
   let pastEventsPerformance = [];
 
   function categoriesPerformance(arrEv) {
     categories.forEach((cat) => {
-      let revenue = 0;
+      let revUpcoming = 0;
+      let revPast = 0;
       let assitanceAttend = 0;
       let estimateAttend = 0;
-      let capacity = 0;
+      let capacityUpcoming = 0;
+      let capacityPast = 0;
 
       for (let i = 0; i < arrEv.length; i++) {
-        if (arrEv[i].category === cat) {
-          revenue += arrEv[i].price * arrEv[i].assistance;
-          //check if use assitance or estimate in revenue
-          capacity += arrEv[i].capacity;
-          if (assitanceAttend === undefined) {
+        if (arrEv[i].category == cat) {
+          if (arrEv[i].assistance == undefined) {
             estimateAttend += arrEv[i].estimate;
-          } else if (estimateAttend === undefined) {
+            revUpcoming += arrEv[i].price * arrEv[i].estimate;
+            capacityUpcoming += arrEv[i].capacity;
+          } else {
             assitanceAttend += arrEv[i].assistance;
+            revPast += arrEv[i].price * arrEv[i].assistance;
+            capacityPast += arrEv[i].capacity;
           }
         }
+      }
+      //bug NaN cinema [6] estimateAttend
+      if (arrEv === upcomingEvents) {
+        estimateAttend *= 100 / capacityUpcoming;
+        upcomingEventsPerformance.push({
+          category: cat,
+          revenues: revUpcoming,
+          atendance: estimateAttend,
+        });
+      } else if (arrEv === pastEvents) {
+        assitanceAttend *= 100 / capacityPast;
+        pastEventsPerformance.push({
+          category: cat,
+          revenues: revPast,
+          atendance: assitanceAttend,
+        });
       }
     });
   }
 
-  //sort of past events
+  //events stadistic table generator
+
+  function createStadisticsByDate(filterDateEvents) {
+    let eventsTab = "";
+    for (const i of filterDateEvents) {
+      eventsTab += `
+                  <tr>
+                    <td>${i.category}</td>
+                    <td>$${i.revenues}</td>
+                    <td>${Number.parseFloat(i.atendance).toFixed(2)}%</td>
+                  </tr>
+      `;
+    }
+    return eventsTab;
+  }
+
+  //upcomings events table
+  categoriesPerformance(upcomingEvents);
+  upcEventTab.innerHTML = createStadisticsByDate(upcomingEventsPerformance);
+
+  //past events table
+  categoriesPerformance(pastEvents);
+  pastEventTab.innerHTML = createStadisticsByDate(pastEventsPerformance);
 }, 1500);
