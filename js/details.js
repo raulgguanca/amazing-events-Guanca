@@ -1,15 +1,17 @@
-setTimeout(() => {
-  //details render
-  const querySrt = location.search;
-  const paramtrs = new URLSearchParams(querySrt);
-  const eventId = paramtrs.get("id");
+fetch(urlApiAE)
+  .then((Response) => Response.json())
+  .then((data) => {
+    //details render
+    const querySrt = location.search;
+    const paramtrs = new URLSearchParams(querySrt);
+    const eventId = paramtrs.get("id");
 
-  const arrayEvents = allEvents.events;
-  const cardsContainer = document.getElementById("main-details");
+    const arrayEvents = allEvents.events;
+    const cardsContainer = document.getElementById("main-details");
 
-  let evnt = arrayEvents[eventId - 1];
+    let evnt = arrayEvents[eventId - 1];
 
-  cardsContainer.innerHTML = `
+    cardsContainer.innerHTML = `
       <div class="cards-container card-details">
         <div class="card card-img">
           <img
@@ -39,4 +41,7 @@ setTimeout(() => {
       </div>
 
         `;
-}, 1500);
+  })
+  .catch((e) => {
+    console.log(e);
+  });

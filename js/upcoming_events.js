@@ -1,28 +1,30 @@
-setTimeout(() => {
-  // cards creator
-  const cardsContainer = document.getElementById("cardsCont");
+fetch(urlApiAE)
+  .then((Response) => Response.json())
+  .then((data) => {
+    // cards creator
+    const cardsContainer = document.getElementById("cardsCont");
 
-  const noResultsMssg = document.getElementById("no-results");
+    const noResultsMssg = document.getElementById("no-results");
 
-  let arrayEvents = allEvents.events;
+    let arrayEvents = allEvents.events;
 
-  let getCurrenDate = allEvents.currentDate;
+    let getCurrenDate = allEvents.currentDate;
 
-  let upcomingEvents = [];
+    let upcomingEvents = [];
 
-  for (const event of arrayEvents) {
-    if (getCurrenDate < event.date) {
-      upcomingEvents.push(event);
+    for (const event of arrayEvents) {
+      if (getCurrenDate < event.date) {
+        upcomingEvents.push(event);
+      }
     }
-  }
 
-  // functions
+    // functions
 
-  function addCards(eventCompositor) {
-    let eventsCards = "";
-    if (eventCompositor.length != 0) {
-      for (const event of eventCompositor) {
-        eventsCards += `
+    function addCards(eventCompositor) {
+      let eventsCards = "";
+      if (eventCompositor.length != 0) {
+        for (const event of eventCompositor) {
+          eventsCards += `
         <div class="card">
           <img class="card-img-top" src="${event.image}" alt="${event.image}">
 
@@ -40,32 +42,32 @@ setTimeout(() => {
         </div>
 
         `;
+        }
         noResultsMssg.innerHTML = ``;
-      }
-    } else {
-      noResultsMssg.innerHTML = `
+      } else {
+        noResultsMssg.innerHTML = `
 <div class="no-results">
 <h2>There's nothing to show here! Try another category, event or check your spelling</h2>
 <img src="../assets/img/error.jpg" alt="error pinguin">
 </div>
 `;
+      }
+      return eventsCards;
     }
-    return eventsCards;
-  }
 
-  let cards = addCards(upcomingEvents);
+    let cards = addCards(upcomingEvents);
 
-  function paintCards() {
-    cardsContainer.innerHTML = cards;
-  }
+    function paintCards() {
+      cardsContainer.innerHTML = cards;
+    }
 
-  //categories
-  const catCont = document.getElementById("catCont");
+    //categories
+    const catCont = document.getElementById("catCont");
 
-  function createCat(catCompositor) {
-    let catEvent = "";
-    for (const cat of catCompositor) {
-      catEvent += `
+    function createCat(catCompositor) {
+      let catEvent = "";
+      for (const cat of catCompositor) {
+        catEvent += `
           <label>
             <input
               type="checkbox"
@@ -77,100 +79,120 @@ setTimeout(() => {
             ${cat}
           </label>
     `;
+      }
+      return catEvent;
     }
-    return catEvent;
-  }
 
-  let category = createCat(categories);
+    let category = createCat(categories);
 
-  catCont.innerHTML = category;
+    catCont.innerHTML = category;
 
-  // categories filters
-  const checkBxCont = document.getElementById("catCont");
+    // categories filters
+    const checkBxCont = document.getElementById("catCont");
 
-  let checkBxCategories = [];
+    let checkBxCategories = [];
 
-  checkBxCont.addEventListener("click", (e) => {
-    if (e.target.checked != undefined) {
-      if (e.target.checked) {
-        checkBxCategories.push(e.target.value);
-      } else {
-        let index = checkBxCategories.indexOf(e.target.value);
-        if (index != -1) {
-          checkBxCategories.splice(index, 1);
+    checkBxCont.addEventListener("click", (e) => {
+      if (e.target.checked != undefined) {
+        if (e.target.checked) {
+          checkBxCategories.push(e.target.value);
+        } else {
+          let index = checkBxCategories.indexOf(e.target.value);
+          if (index != -1) {
+            checkBxCategories.splice(index, 1);
+          }
+        }
+        cards = [];
+        createCheckedEvents();
+      }
+    });
+
+    checkBxCont.addEventListener("click", (e) => {
+      if (!e.target.checked && checkBxCategories.length === 0) {
+        cards = addCards(upcomingEvents);
+        paintCards();
+      }
+    });
+
+    let filtredEvents = [];
+
+    function checkBxCompositor(list, events) {
+      let checkedEvents = [];
+
+      for (const e of events) {
+        if (list.includes(e.category)) {
+          checkedEvents.push(e);
         }
       }
+      return checkedEvents;
+    }
+
+    function createCheckedEvents() {
+      if (checkBxCategories.length != 0) {
+        cards = addCards(checkBxCompositor(checkBxCategories, upcomingEvents));
+        paintCards();
+      }
+    }
+
+    //search filter
+    const srchInpt = document.getElementById("search");
+
+    function checkBxFilter(list, events) {
+      let inputFilter = [];
+
+      for (const e of events) {
+        if (e.name.toLowerCase().includes(list)) {
+          inputFilter.push(e);
+        }
+      }
+      return inputFilter;
+    }
+
+    srchInpt.addEventListener("keyup", () => {
+      if (checkBxCategories.length != 0) {
+        cards = addCards(
+          checkBxFilter(
+            srchInpt.value.toLowerCase(),
+            checkBxCompositor(checkBxCategories, upcomingEvents)
+          )
+        );
+        paintCards();
+      } else {
+        cards = addCards(
+          checkBxFilter(srchInpt.value.toLowerCase(), upcomingEvents)
+        );
+        paintCards();
+      }
+    });
+
+    //input button
+    const inputButton = document.getElementById("form-search-bttn");
+
+    function filtrInptCrdsBttn() {
+      if (checkBxCategories.length != 0) {
+        cards = addCards(
+          checkBxFilter(
+            srchInpt.value.toLowerCase(),
+            checkBxCompositor(checkBxCategories, upcomingEvents)
+          )
+        );
+        paintCards();
+      } else {
+        cards = addCards(
+          checkBxFilter(srchInpt.value.toLowerCase(), arrayEvents)
+        );
+        paintCards();
+      }
+    }
+
+    inputButton.addEventListener("click", (e) => {
       cards = [];
-      createCheckedEvents();
-    }
-  });
+      filtrInptCrdsBttn();
+    });
 
-  checkBxCont.addEventListener("click", (e) => {
-    if (!e.target.checked && checkBxCategories.length === 0) {
-      cards = addCards(upcomingEvents);
-      paintCards();
-    }
-  });
-
-  let filtredEvents = [];
-
-  function checkBxCompositor(list, events) {
-    let checkedEvents = [];
-
-    for (const e of events) {
-      if (list.includes(e.category)) {
-        checkedEvents.push(e);
-      }
-    }
-    return checkedEvents;
-  }
-
-  function createCheckedEvents() {
-    if (checkBxCategories.length != 0) {
-      cards = addCards(checkBxCompositor(checkBxCategories, upcomingEvents));
-      paintCards();
-    }
-  }
-
-  //search filter
-  const srchInpt = document.getElementById("search");
-
-  function checkBxFilter(list, events) {
-    let inputFilter = [];
-
-    for (const e of events) {
-      if (e.name.toLowerCase().includes(list)) {
-        inputFilter.push(e);
-      }
-    }
-    return inputFilter;
-  }
-
-  srchInpt.addEventListener("keyup", () => {
-    if (checkBxCategories.length != 0) {
-      cards = addCards(
-        checkBxFilter(
-          srchInpt.value.toLowerCase(),
-          checkBxCompositor(checkBxCategories, upcomingEvents)
-        )
-      );
-      paintCards();
-    } else {
-      cards = addCards(
-        checkBxFilter(srchInpt.value.toLowerCase(), upcomingEvents)
-      );
-      paintCards();
-    }
-  });
-
-  //input button
-  function filtrInptCrdsBttn() {
-    cards = addCards(
-      checkBxFilter(srchInpt.value.toLowerCase(), upcomingEvents)
-    );
+    //calling functions
     paintCards();
-  }
-
-  //calling functions
-  paintCards();
-}, 1500);
+  })
+  .catch((e) => {
+    console.log(e);
+  });
