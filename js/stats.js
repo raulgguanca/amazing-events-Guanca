@@ -126,28 +126,31 @@ setTimeout(() => {
             estimateAttend += arrEv[i].estimate;
             revUpcoming += arrEv[i].price * arrEv[i].estimate;
             capacityUpcoming += arrEv[i].capacity;
-          } else {
+          } else if (arrEv[i].estimate == undefined) {
             assitanceAttend += arrEv[i].assistance;
             revPast += arrEv[i].price * arrEv[i].assistance;
             capacityPast += arrEv[i].capacity;
           }
         }
       }
-      //bug NaN cinema [6] estimateAttend
-      if (arrEv === upcomingEvents) {
+      if (arrEv == upcomingEvents) {
         estimateAttend *= 100 / capacityUpcoming;
-        upcomingEventsPerformance.push({
-          category: cat,
-          revenues: revUpcoming,
-          atendance: estimateAttend,
-        });
-      } else if (arrEv === pastEvents) {
+        if (estimateAttend >= 0) {
+          upcomingEventsPerformance.push({
+            category: cat,
+            revenues: revUpcoming,
+            atendance: estimateAttend,
+          });
+        }
+      } else if (arrEv == pastEvents) {
         assitanceAttend *= 100 / capacityPast;
-        pastEventsPerformance.push({
-          category: cat,
-          revenues: revPast,
-          atendance: assitanceAttend,
-        });
+        if (assitanceAttend >= 0) {
+          pastEventsPerformance.push({
+            category: cat,
+            revenues: revPast,
+            atendance: assitanceAttend,
+          });
+        }
       }
     });
   }
