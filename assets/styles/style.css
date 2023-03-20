@@ -274,6 +274,27 @@ address a {
     color: #f72585;
 }
 
+.button-up {
+    position: fixed;
+    bottom: 40px;
+    right: 15px;
+}
+
+.button-up a {
+    color: #f72585;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: larger;
+    border: 1px solid #f72585;
+    border-radius: 10px;
+    /*transition: 0.3s;*/
+}
+
+.button-up a:hover {
+    background-color: #f72585;
+    color: black;
+  }
+
 /* media queries */
 @media screen and (max-width:1000px) {
     .navbar {
