@@ -1,30 +1,60 @@
-fetch(urlApiAE)
-  .then((Response) => Response.json())
-  .then((data) => {
-    // cards creator
-    const cardsContainer = document.getElementById("cardsCont");
+//api
+const urlApiAE = "https://mindhub-xj03.onrender.com/api/amazing";
 
-    const noResultsMssg = document.getElementById("no-results");
+let allEvents = [];
+let categories = [];
+let cards;
+let category;
+let upcomingEvents = [];
+let arrayEvents;
 
-    let arrayEvents = allEvents.events;
+async function getEvents() {
+  try {
+    let response = await fetch(urlApiAE);
+    let data = await response.json();
 
-    let getCurrenDate = allEvents.currentDate;
+    allEvents = data;
 
-    let upcomingEvents = [];
+    for (const cat of allEvents.events) {
+      if (!categories.includes(cat.category)) categories.push(cat.category);
+    }
+
+    arrayEvents = allEvents.events;
+
+    let getCurrentDate = allEvents.currentDate;
 
     for (const event of arrayEvents) {
-      if (getCurrenDate < event.date) {
+      if (getCurrentDate < event.date) {
         upcomingEvents.push(event);
       }
     }
 
-    // functions
+    category = createCat(categories);
 
-    function addCards(eventCompositor) {
-      let eventsCards = "";
-      if (eventCompositor.length != 0) {
-        for (const event of eventCompositor) {
-          eventsCards += `
+    catCont.innerHTML = category;
+
+    cards = addCards(upcomingEvents);
+
+    paintCards();
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+getEvents();
+
+// cards creator
+const cardsContainer = document.getElementById("cardsCont");
+
+const noResultsMssg = document.getElementById("no-results");
+
+// functions
+
+function addCards(eventCompositor) {
+  let eventsCards = "";
+  if (eventCompositor.length != 0) {
+    for (const event of eventCompositor) {
+      eventsCards += `
         <div class="card">
           <img class="card-img-top" src="${event.image}" alt="${event.image}">
 
@@ -42,32 +72,30 @@ fetch(urlApiAE)
         </div>
 
         `;
-        }
-        noResultsMssg.innerHTML = ``;
-      } else {
-        noResultsMssg.innerHTML = `
+    }
+    noResultsMssg.innerHTML = ``;
+  } else {
+    noResultsMssg.innerHTML = `
 <div class="no-results">
 <h2>There's nothing to show here! Try another category, event or check your spelling</h2>
 <img src="../assets/img/error.jpg" alt="error pinguin">
 </div>
 `;
-      }
-      return eventsCards;
-    }
+  }
+  return eventsCards;
+}
 
-    let cards = addCards(upcomingEvents);
+function paintCards() {
+  cardsContainer.innerHTML = cards;
+}
 
-    function paintCards() {
-      cardsContainer.innerHTML = cards;
-    }
+//categories
+const catCont = document.getElementById("catCont");
 
-    //categories
-    const catCont = document.getElementById("catCont");
-
-    function createCat(catCompositor) {
-      let catEvent = "";
-      for (const cat of catCompositor) {
-        catEvent += `
+function createCat(catCompositor) {
+  let catEvent = "";
+  for (const cat of catCompositor) {
+    catEvent += `
           <label>
             <input
               type="checkbox"
@@ -79,120 +107,107 @@ fetch(urlApiAE)
             ${cat}
           </label>
     `;
-      }
-      return catEvent;
-    }
+  }
+  return catEvent;
+}
 
-    let category = createCat(categories);
+// categories filters
+const checkBxCont = document.getElementById("catCont");
 
-    catCont.innerHTML = category;
+let checkBxCategories = [];
 
-    // categories filters
-    const checkBxCont = document.getElementById("catCont");
-
-    let checkBxCategories = [];
-
-    checkBxCont.addEventListener("click", (e) => {
-      if (e.target.checked != undefined) {
-        if (e.target.checked) {
-          checkBxCategories.push(e.target.value);
-        } else {
-          let index = checkBxCategories.indexOf(e.target.value);
-          if (index != -1) {
-            checkBxCategories.splice(index, 1);
-          }
-        }
-        cards = [];
-        createCheckedEvents();
-      }
-    });
-
-    checkBxCont.addEventListener("click", (e) => {
-      if (!e.target.checked && checkBxCategories.length === 0) {
-        cards = addCards(upcomingEvents);
-        paintCards();
-      }
-    });
-
-    let filtredEvents = [];
-
-    function checkBxCompositor(list, events) {
-      let checkedEvents = [];
-
-      for (const e of events) {
-        if (list.includes(e.category)) {
-          checkedEvents.push(e);
-        }
-      }
-      return checkedEvents;
-    }
-
-    function createCheckedEvents() {
-      if (checkBxCategories.length != 0) {
-        cards = addCards(checkBxCompositor(checkBxCategories, upcomingEvents));
-        paintCards();
+checkBxCont.addEventListener("click", (e) => {
+  if (e.target.checked != undefined) {
+    if (e.target.checked) {
+      checkBxCategories.push(e.target.value);
+    } else {
+      let index = checkBxCategories.indexOf(e.target.value);
+      if (index != -1) {
+        checkBxCategories.splice(index, 1);
       }
     }
+    cards = [];
+    createCheckedEvents();
+  }
+});
 
-    //search filter
-    const srchInpt = document.getElementById("search");
-
-    function checkBxFilter(list, events) {
-      let inputFilter = [];
-
-      for (const e of events) {
-        if (e.name.toLowerCase().includes(list)) {
-          inputFilter.push(e);
-        }
-      }
-      return inputFilter;
-    }
-
-    srchInpt.addEventListener("keyup", () => {
-      if (checkBxCategories.length != 0) {
-        cards = addCards(
-          checkBxFilter(
-            srchInpt.value.toLowerCase(),
-            checkBxCompositor(checkBxCategories, upcomingEvents)
-          )
-        );
-        paintCards();
-      } else {
-        cards = addCards(
-          checkBxFilter(srchInpt.value.toLowerCase(), upcomingEvents)
-        );
-        paintCards();
-      }
-    });
-
-    //input button
-    const inputButton = document.getElementById("form-search-bttn");
-
-    function filtrInptCrdsBttn() {
-      if (checkBxCategories.length != 0) {
-        cards = addCards(
-          checkBxFilter(
-            srchInpt.value.toLowerCase(),
-            checkBxCompositor(checkBxCategories, upcomingEvents)
-          )
-        );
-        paintCards();
-      } else {
-        cards = addCards(
-          checkBxFilter(srchInpt.value.toLowerCase(), arrayEvents)
-        );
-        paintCards();
-      }
-    }
-
-    inputButton.addEventListener("click", (e) => {
-      cards = [];
-      filtrInptCrdsBttn();
-    });
-
-    //calling functions
+checkBxCont.addEventListener("click", (e) => {
+  if (!e.target.checked && checkBxCategories.length === 0) {
+    cards = addCards(upcomingEvents);
     paintCards();
-  })
-  .catch((e) => {
-    console.log(e);
-  });
+  }
+});
+
+let filtredEvents = [];
+
+function checkBxCompositor(list, events) {
+  let checkedEvents = [];
+
+  for (const e of events) {
+    if (list.includes(e.category)) {
+      checkedEvents.push(e);
+    }
+  }
+  return checkedEvents;
+}
+
+function createCheckedEvents() {
+  if (checkBxCategories.length != 0) {
+    cards = addCards(checkBxCompositor(checkBxCategories, upcomingEvents));
+    paintCards();
+  }
+}
+
+//search filter
+const srchInpt = document.getElementById("search");
+
+function checkBxFilter(list, events) {
+  let inputFilter = [];
+
+  for (const e of events) {
+    if (e.name.toLowerCase().includes(list)) {
+      inputFilter.push(e);
+    }
+  }
+  return inputFilter;
+}
+
+srchInpt.addEventListener("keyup", () => {
+  if (checkBxCategories.length != 0) {
+    cards = addCards(
+      checkBxFilter(
+        srchInpt.value.toLowerCase(),
+        checkBxCompositor(checkBxCategories, upcomingEvents)
+      )
+    );
+    paintCards();
+  } else {
+    cards = addCards(
+      checkBxFilter(srchInpt.value.toLowerCase(), upcomingEvents)
+    );
+    paintCards();
+  }
+});
+
+//input button
+const inputButton = document.getElementById("form-search-bttn");
+
+function filtrInptCrdsBttn() {
+  if (checkBxCategories.length != 0) {
+    cards = addCards(
+      checkBxFilter(
+        srchInpt.value.toLowerCase(),
+        checkBxCompositor(checkBxCategories, upcomingEvents)
+      )
+    );
+    paintCards();
+  } else {
+    cards = addCards(checkBxFilter(srchInpt.value.toLowerCase(), arrayEvents));
+    paintCards();
+  }
+}
+
+inputButton.addEventListener("click", (e) => {
+  cards = [];
+  filtrInptCrdsBttn();
+});

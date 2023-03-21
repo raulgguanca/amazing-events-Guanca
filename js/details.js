@@ -1,17 +1,35 @@
-fetch(urlApiAE)
-  .then((Response) => Response.json())
-  .then((data) => {
-    //details render
-    const querySrt = location.search;
-    const paramtrs = new URLSearchParams(querySrt);
-    const eventId = paramtrs.get("id");
+//api
+const urlApiAE = "https://mindhub-xj03.onrender.com/api/amazing";
 
-    const arrayEvents = allEvents.events;
-    const cardsContainer = document.getElementById("main-details");
+let allEvents = [];
 
-    let evnt = arrayEvents[eventId - 1];
+async function getEvents() {
+  try {
+    let response = await fetch(urlApiAE);
+    let data = await response.json();
 
-    cardsContainer.innerHTML = `
+    allEvents = data;
+
+    let arrayEvents = allEvents.events;
+    let events = arrayEvents[eventId - 1];
+
+    createEventDetails(events);
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+getEvents();
+
+//render details
+const querySrt = location.search;
+const paramtrs = new URLSearchParams(querySrt);
+const eventId = paramtrs.get("id");
+
+const cardsContainer = document.getElementById("main-details");
+
+function createEventDetails(evnt) {
+  cardsContainer.innerHTML = `
       <div class="cards-container card-details">
         <div class="card card-img">
           <img
@@ -41,7 +59,4 @@ fetch(urlApiAE)
       </div>
 
         `;
-  })
-  .catch((e) => {
-    console.log(e);
-  });
+}
