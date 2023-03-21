@@ -28,7 +28,19 @@ nav img {
     font-size: larger;
 }
 
+#active {
+  background-color: #f72585;
+  color: white;
+  border-radius: 10px;
+}
+
+#active:hover {
+    background-color: bisque;
+    color: #f72585;
+}
+
 .navbar-nav a:hover {
+    background-color: bisque;
     color: #f72585;
 }
 
@@ -234,19 +246,19 @@ table, th, td {
 
 th, td {
     height: 1.5rem;
-    width: 33%;
+    width: 34%;
     text-align: center;
 }
 
 .table-main-head {
     height: 3rem;
-    background-color: wheat;
+    background-color: orange;
     font-size: x-large;
     font-weight: bolder;
 }
 
 .tr-table {
-  background-color: antiquewhite;
+  background-color: wheat;
 }
 
 tbody tr:nth-child(odd) {
@@ -335,6 +347,15 @@ address a:hover {
       color: #f72585;
     }
 
+    #active {
+      background-color: unset;
+      color: #f72585;
+    }
+
+    #active:hover {
+      color: orange;
+    }
+
     .search-form {
         display: flex;
         justify-content: flex-start;
@@ -405,7 +426,7 @@ address a:hover {
     }
 
     .cardFooter {
-        width: 60vw;
+        width: 90%;
     }
 
     .cards-container {
@@ -431,5 +452,9 @@ address a:hover {
 
     h2 {
         font-size: 1.9rem;
+    }
+
+    .button-up {
+      right: 5px;
     }
 }
