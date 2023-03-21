@@ -56,7 +56,7 @@ function addCards(eventCompositor) {
             <div class="cardFooter">
               <p>$${event.price}</p>
 
-              <a href="./pages/details.html?id=${event._id}" class="btn btn-success">View More...</a>
+              <a href="./pages/details.html?id=${event._id}" class="btn">View More...</a>
             </div>
           </div>
         </div>

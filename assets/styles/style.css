@@ -12,7 +12,6 @@ body {
 }
 
 .navbar {
-    /*height: 10vh;*/
     background-color:  bisque;
 }
 
@@ -31,7 +30,6 @@ nav img {
 }
 
 .title {
-    /*height: 8vh;*/
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -54,14 +52,6 @@ h1 {
 
 .fa-backward:hover, .fa-forward:hover {
     color: #f72585;
-}
-
-main {
-    height: 77vh;
-}
-
-#main-details {
-    height: 85vh;
 }
 
 /* search */
@@ -90,13 +80,15 @@ main {
 
 .card {
     width: 20rem;
-    height: 35rem;
+    height: 28rem;
     margin: 0.3rem 0;
     display: flex;
+    background-color: bisque;
 }
 
 .card > img {
     width: 100%;
+    height: 40%;
     object-fit: cover;
     margin-top: 1rem;
     border-radius: 10px;
@@ -113,9 +105,24 @@ main {
     align-items: flex-end;
 }
 
+.cardFooter p {
+  font-size: larger;
+}
+
+.btn {
+  background-color: #ffafcc;
+  color: black;
+  border: #ffafcc;
+}
+
+.btn:hover {
+  background-color: #f72585;
+  color: white;
+}
+
 /* card details */
 .card-details {
-    width: 100vw;
+    width: 95vw;
     display: flex;
     justify-content: space-around;
 }
@@ -127,7 +134,7 @@ main {
 }
 
 .img-details {
-    width: 90%;
+    width: 50%;
     margin-bottom: 1rem;
 }
 
@@ -155,7 +162,6 @@ h2 {
 }
 
 /*no results message*/
-/*.no-results-container*/
 
 .no-results {
   display: flex;
@@ -244,8 +250,7 @@ tbody tr:nth-child(even) {
 
 /* footer */
 footer {
-    height: 5vh;
-    padding: 0.5rem 0;
+    padding: 0.2rem 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -274,7 +279,7 @@ footer {
 }
 
 .footerSignature {
-    margin-top: 1rem;
+    margin-top: 0.5rem;
     font-size: small;
 }
 
@@ -288,10 +293,14 @@ address a {
     color: #f72585;
 }
 
+address a:hover {
+  font-weight: bolder;
+}
+
 .button-up {
     position: fixed;
-    bottom: 40px;
-    right: 15px;
+    bottom: 55px;
+    right: 10px;
 }
 
 .button-up a {
