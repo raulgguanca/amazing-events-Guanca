@@ -166,20 +166,19 @@ h1 {
 
 #card-text-description {
   height: 5rem;
+  text-decoration-line: unset;
 }
 
 .card-body-details p {
     height: 2rem;
     align-self: flex-start; 
+    text-decoration-line: underline;
 }
+
 
 h2 {
     height: 20%;
     font-size: 3rem;
-}
-
-.card-text {
-  text-decoration-line: underline;
 }
 
 /*no results message*/
